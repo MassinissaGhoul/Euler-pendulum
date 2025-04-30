@@ -16,3 +16,30 @@ def int_rectangle(f : callable([[float], float]), sub_div_list):
     for i in range(N):
         integral += f(sub_div_list[i])
     return integral * (sub_div_list[1] - sub_div_list[0])
+
+def int_trapez(f : callable([[float], float]), sub_div_list):
+    integral = 0
+    N = len(sub_div_list) - 1
+    for i in range(N):
+        integral += (f(sub_div_list[i]) + f(sub_div_list[i+1])) / 2
+    return integral * (sub_div_list[1] - sub_div_list[0])
+
+def f2(x):
+    return np.sqrt(1 - x**2)
+
+if(int(input("Type 1 to show 𝐼 = ∫₀¹ √(1 − x²) dx = π/4 \n")) == 1):
+    # Integral of f(x) from 0 to 1 using rectangles and trapez
+    rec100 = int_rectangle(f2, subdiv_reg(0, 1, 100))
+    rec1000 = int_rectangle(f2, subdiv_reg(0, 1, 1000))
+    rec10000 = int_rectangle(f2, subdiv_reg(0, 1, 10000))
+    print("Integral of f2(x) from 0 to 1 using rectangles100: ", rec100)
+    print("Integral of f2(x) from 0 to 1 using rectangles1000: ", rec1000)
+    print("Integral of f2(x) from 0 to 1 using rectangles10000: ", rec10000)
+
+    trap100 = int_trapez(f2, subdiv_reg(0, 1, 100))
+    trap1000 = int_trapez(f2, subdiv_reg(0, 1, 1000))
+    trap10000 = int_trapez(f2, subdiv_reg(0, 1, 10000))
+    print("Integral of f2(x) from 0 to 1 using trapez100: ", trap100)
+    print("Integral of f2(x) from 0 to 1 using trapez1000: ", trap1000)
+    print("Integral of f2(x) from 0 to 1 using trapez10000: ", trap10000)
+
